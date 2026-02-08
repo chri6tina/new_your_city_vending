@@ -1,0 +1,30 @@
+{
+  "name": "nyc-vending-website",
+  "version": "1.0.0",
+  "description": "Modern vending machine services website for New York City",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/index.html",
+    "start": "live-server --port=3000 --open=/index.html",
+    "build": "echo 'Static site - no build process needed'",
+    "serve": "live-server --port=8080"
+  },
+  "keywords": [
+    "vending-machines",
+    "new-york-city",
+    "nyc",
+    "business-website",
+    "static-site"
+  ],
+  "author": "NYC Vending",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nyc-vending/website.git"
+  },
+  "homepage": "https://nycvending.com"
+}
+
