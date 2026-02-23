@@ -170,7 +170,22 @@ p {
 .nav-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    padding: 12px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-toggle:active {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .bar {
@@ -1995,6 +2010,15 @@ body.service-page {
         padding: 1rem 0;
         display: flex;
         align-items: center;
+    }
+
+    .nav-container {
+        padding: 0 1.5rem;
+        width: 100%;
+    }
+
+    .nav-logo h2 {
+        font-size: 1.5rem;
     }
 
     .nav-menu {
