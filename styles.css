@@ -6,10 +6,15 @@
 }
 
 html {
+    margin: 0;
+    padding: 0;
     scroll-behavior: smooth;
+    background: #000;
 }
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: #333;
@@ -92,6 +97,8 @@ p {
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
