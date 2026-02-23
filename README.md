@@ -169,7 +169,7 @@ Edit the CSS custom properties in `styles.css`:
 
 **NYC Vending**
 - Phone: (555) 123-VEND
-- Email: info@nycvending.com
+- Email: info@newyorkcityvending.com
 - Service Area: All 5 Boroughs of NYC
 - Hours: Mon-Fri 8AM-6PM, Emergency 24/7
 
