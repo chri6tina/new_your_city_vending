@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import PageHero from '../../../components/PageHero'
+import PageHero from '../../components/PageHero'
 import { services } from '../../../lib/services'
 
 export async function generateStaticParams() {
