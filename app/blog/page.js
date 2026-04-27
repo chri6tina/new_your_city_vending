@@ -11,6 +11,11 @@ export default function BlogIndex() {
 
   return (
     <main>
+      <style>{`
+        .blog-card { transition: box-shadow 0.2s, transform 0.2s; }
+        .blog-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
+      `}</style>
+
       {/* Hero */}
       <section style={{ background: '#0A1628', padding: '80px 0 60px' }}>
         <div className="container" style={{ maxWidth: '760px' }}>
@@ -33,13 +38,10 @@ export default function BlogIndex() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {posts.map(post => (
                 <Link key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
-                  <article style={{
+                  <article className="blog-card" style={{
                     background: 'white', border: '1px solid #E2E8F0', borderRadius: '14px',
-                    padding: '28px 32px', transition: 'box-shadow 0.2s, transform 0.2s',
-                  }}
-                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                    onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none' }}
-                  >
+                    padding: '28px 32px',
+                  }}>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
                       {post.tags.slice(0, 3).map(tag => (
                         <span key={tag} style={{
