@@ -58,13 +58,14 @@
   padding: 12px 14px;
   border: 1.5px solid var(--border);
   border-radius: 9px;
-  font-size: 14px;
+  font-size: 16px; /* 16px prevents iOS auto-zoom on focus */
   font-family: var(--font);
   color: var(--text);
   background: var(--gray-50);
   outline: none;
   transition: var(--transition);
   appearance: none;
+  -webkit-text-size-adjust: 100%;
 }
 .input:focus {
   border-color: var(--blue);
@@ -121,9 +122,10 @@
 .success p { font-size: 14px; color: var(--text-muted); }
 
 /* Mobile: stack rows */
-@media (max-width: 860px) {
+@media (max-width: 960px) {
+  .row { grid-template-columns: 1fr; }
   .card { padding: 24px 20px; }
 }
 @media (max-width: 480px) {
-  .row { grid-template-columns: 1fr; }
+  .card { padding: 20px 16px; }
 }
