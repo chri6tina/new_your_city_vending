@@ -1,0 +1,173 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.topBar {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 0;
+  text-align: center;
+}
+.topBar .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.topBar .container span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.topPhone {
+  color: var(--yellow);
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.topPhone:hover { color: #fff; }
+
+/* ── Main nav ── */
+.nav {
+  background: var(--navy);
+  padding: 0;
+}
+.navInner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 64px;
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.logoMark {
+  background: var(--yellow);
+  color: var(--navy-dark);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.logoText {
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ── Desktop nav links ── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  flex: 1;
+  justify-content: center;
+}
+.navLink {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.navLink:hover {
+  color: white;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── CTA button ── */
+.ctaBtn {
+  flex-shrink: 0;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+.barOpen1 { transform: translateY(7px) rotate(45deg); }
+.barOpen2 { opacity: 0; transform: scaleX(0); }
+.barOpen3 { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile drawer ── */
+.drawer {
+  background: var(--navy-dark);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.drawerLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.drawerLink {
+  display: block;
+  color: rgba(255,255,255,0.85);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: var(--transition);
+}
+.drawerLink:hover {
+  color: white;
+  background: rgba(255,255,255,0.06);
+}
+.drawerCta {
+  margin: 16px 24px 0;
+  text-align: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .navLinks { display: none; }
+  .ctaBtn { display: none; }
+  .hamburger { display: flex; }
+  .navInner { gap: 16px; }
+  /* Hide top bar on mobile — hamburger handles nav */
+  .topBar { display: none; }
+}
+
+@media (min-width: 769px) {
+  .drawer { display: none; }
+}

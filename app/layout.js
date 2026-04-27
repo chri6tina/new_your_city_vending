@@ -1,0 +1,33 @@
+import { Inter } from 'next/font/google'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+export const metadata = {
+  title: 'New York City Vending | Free Vending Machine Installation — All 5 Boroughs',
+  description: "NYC's premier vending machine service provider. Free installation, zero cost to your business. Micro markets, AI vending, coffee services & pantry — serving Manhattan, Brooklyn, Queens, Bronx & Staten Island.",
+  keywords: 'vending machine NYC, micro market New York, office coffee service NYC, AI vending machine, pantry service New York, free vending machine installation',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
+}
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={inter.variable}>
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  )
+}
