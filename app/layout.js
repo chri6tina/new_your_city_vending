@@ -23,6 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        {/* Disable scroll restoration before browser can jump down on refresh */}
+        <script dangerouslySetInnerHTML={{ __html: `if('scrollRestoration' in history){history.scrollRestoration='manual';}` }} />
+      </head>
       <body>
         <Navbar />
         {children}

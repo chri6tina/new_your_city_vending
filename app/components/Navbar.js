@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import styles from './Navbar.module.css'
 
@@ -13,14 +13,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    // Always start at top on refresh — disable browser scroll restoration
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual'
-    }
-    window.scrollTo(0, 0)
-  }, [])
 
   return (
     <header className={styles.header}>
