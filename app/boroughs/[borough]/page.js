@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import HeroForm from '../../components/HeroForm'
 
 const boroughData = {
   manhattan: {
@@ -77,69 +76,79 @@ export default async function BoroughPage({ params }) {
   const { borough } = await params
   const data = boroughData[borough]
   if (!data) notFound()
-
   return (
     <main>
       {/* ── Hero ── */}
-      <section style={{
-        background: `linear-gradient(135deg, ${data.bgColor} 0%, #0A1628 100%)`,
-        padding: '120px 0 80px',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        {/* Decorative circles */}
-        <div style={{
-          position: 'absolute', inset: 0, opacity: 0.06,
-          background: 'radial-gradient(circle at 80% 50%, #F59E0B 0%, transparent 60%)',
-          pointerEvents: 'none',
-        }} />
+      <section style={{ position: 'relative', minHeight: '70vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+        {/* Background photo */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <Image
+            src="/new_york_city_hero.jpg"
+            alt={`Vending services in ${data.name}, NYC`}
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            priority
+            quality={85}
+          />
+          {/* Overlay — lighter so you can see the photo */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(160deg, rgba(5,15,35,0.78) 0%, rgba(5,15,35,0.62) 50%, rgba(5,15,35,0.48) 100%)',
+          }} />
+        </div>
 
-        <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '56px', alignItems: 'center' }}>
-          {/* Left */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(245,158,11,0.15)', border: '1px solid rgba(245,158,11,0.4)',
-              color: '#FCD34D', fontSize: '13px', fontWeight: 700, padding: '8px 16px',
-              borderRadius: '8px', width: 'fit-content', letterSpacing: '0.04em',
-            }}>
-              {data.icon} Serving {data.name}, NYC
+        <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '22px', padding: '120px 0 80px', maxWidth: '660px' }}>
+          {/* Badge */}
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.28)',
+            color: 'rgba(255,255,255,0.92)', fontSize: '13px', fontWeight: 600,
+            padding: '8px 16px', borderRadius: '100px', width: 'fit-content',
+            backdropFilter: 'blur(4px)',
+          }}>
+            {data.icon} Free Vending Services · {data.name}, NYC
+          </span>
+
+          <h1 style={{ fontSize: 'clamp(34px, 5vw, 58px)', fontWeight: 900, color: 'white', lineHeight: 1.07, letterSpacing: '-0.03em' }}>
+            Vending &amp; Micro Market<br />
+            <span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.35)', textUnderlineOffset: '6px', textDecorationThickness: '3px' }}>
+              Services in {data.name}
             </span>
+          </h1>
 
-            <h1 style={{
-              fontSize: 'clamp(32px, 4.5vw, 56px)', fontWeight: 900,
-              color: 'white', lineHeight: 1.08, letterSpacing: '-0.03em',
+          <p style={{ fontSize: 'clamp(15px, 2vw, 18px)', color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, maxWidth: '540px' }}>
+            {data.description}
+          </p>
+
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <a href="/#contact" style={{
+              background: 'white', color: '#0A1628', fontSize: '16px', fontWeight: 800,
+              padding: '15px 28px', borderRadius: '10px', textDecoration: 'none', whiteSpace: 'nowrap',
             }}>
-              Free Vending &amp; Micro Market<br />
-              <span style={{ color: '#F59E0B' }}>Services in {data.name}</span>
-            </h1>
-
-            <p style={{ fontSize: '17px', color: 'rgba(255,255,255,0.78)', lineHeight: 1.7, maxWidth: '500px' }}>
-              {data.description}
-            </p>
-
-            <div style={{
-              background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)',
-              borderRadius: '10px', padding: '14px 18px',
-              color: '#FCD34D', fontSize: '14px', fontWeight: 600,
+              Request a Free Site Visit →
+            </a>
+            <a href="#services-section" style={{
+              color: 'rgba(255,255,255,0.88)', fontSize: '15px', fontWeight: 600,
+              paddingBottom: '2px', borderBottom: '2px solid rgba(255,255,255,0.35)',
+              textDecoration: 'none', whiteSpace: 'nowrap',
             }}>
-              💡 {data.highlight}
-            </div>
-
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.65)' }}>✅ Free Installation</span>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.65)' }}>🔄 24/7 Restocking</span>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.65)' }}>🔧 Full Maintenance</span>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.65)' }}>📝 No Contracts</span>
-            </div>
+              See Our Services
+            </a>
           </div>
 
-          {/* Right: form */}
-          <div style={{ flexShrink: 0, width: '420px' }}>
-            <HeroForm />
+          {/* Trust pills */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', paddingTop: '4px' }}>
+            {['✅ Free Installation', '🔄 24/7 Restocking', '🔧 Full Maintenance', '📝 No Contracts'].map(t => (
+              <span key={t} style={{
+                background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)',
+                color: 'rgba(255,255,255,0.82)', fontSize: '12px', fontWeight: 600,
+                padding: '6px 14px', borderRadius: '100px', backdropFilter: 'blur(4px)',
+              }}>{t}</span>
+            ))}
           </div>
         </div>
       </section>
+
 
       {/* ── Services ── */}
       <section style={{ padding: '80px 0', background: '#F8FAFC' }}>
