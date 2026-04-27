@@ -26,13 +26,31 @@ export default function HeroForm() {
     name: '', company: '', employees: '', service: '', email: ''
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // TODO: wire to backend
-    setSubmitted(true)
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('https://formspree.io/f/meevbjrd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError('Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -107,10 +125,11 @@ export default function HeroForm() {
           onChange={set('email')}
         />
 
-        <button type="submit" className={styles.submit}>
-          Get My Free Quote →
+        <button type="submit" className={styles.submit} disabled={loading}>
+          {loading ? 'Sending…' : 'Get My Free Quote →'}
         </button>
 
+        {error && <p style={{ color: 'red', fontSize: '13px', textAlign: 'center' }}>{error}</p>}
         <p className={styles.disclaimer}>🔒 No spam. No cost. No obligation.</p>
       </form>
     </div>

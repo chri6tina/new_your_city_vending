@@ -12,13 +12,31 @@ const boroughs = ['Manhattan', 'Brooklyn', 'Queens', 'The Bronx', 'Staten Island
 export default function Contact() {
   const [form, setForm] = useState({ name: '', company: '', phone: '', email: '', borough: '', service: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // TODO: wire to real backend / email service
-    setSubmitted(true)
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('https://formspree.io/f/meevbjrd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError('Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -110,9 +128,10 @@ export default function Contact() {
                   <label className={styles.label}>Additional Details</label>
                   <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Tell us about your space, number of employees, etc." rows={4} value={form.message} onChange={set('message')} />
                 </div>
-                <button type="submit" className={`btn btn-primary ${styles.submit}`}>
-                  Send My Free Quote Request →
+                <button type="submit" className={`btn btn-primary ${styles.submit}`} disabled={loading}>
+                  {loading ? 'Sending…' : 'Send My Free Quote Request →'}
                 </button>
+                {error && <p style={{ color: '#ef4444', fontSize: '13px', marginTop: '8px' }}>{error}</p>}
                 <p className={styles.disclaimer}>No obligation. No cost. We&apos;ll never spam you.</p>
               </form>
             )}
