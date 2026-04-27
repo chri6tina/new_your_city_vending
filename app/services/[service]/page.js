@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import PageHero from '../../../components/PageHero'
 import { services } from '../../../lib/services'
 
 export async function generateStaticParams() {
@@ -23,47 +23,20 @@ export default async function ServicePage({ params }) {
 
   return (
     <main>
-      {/* ── Hero ── */}
-      <section style={{ background: '#0A1628', padding: '80px 0 0', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.12, background: 'radial-gradient(circle at 70% 50%, #3B82F6 0%, transparent 60%)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center', paddingBottom: '0' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingBottom: '80px' }}>
-            <span style={{ fontSize: '36px' }}>{data.icon}</span>
-            <span style={{ display: 'inline-block', background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.4)', color: '#93C5FD', fontSize: '12px', fontWeight: 700, padding: '6px 14px', borderRadius: '100px', width: 'fit-content', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-              Free for Qualifying NYC Businesses
-            </span>
-            <h1 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 900, color: 'white', lineHeight: 1.08, letterSpacing: '-0.03em' }}>
-              {data.name}
-            </h1>
-            <p style={{ color: '#FCD34D', fontWeight: 700, fontSize: '15px' }}>{data.tagline}</p>
-            <p style={{ fontSize: '17px', color: 'rgba(255,255,255,0.78)', lineHeight: 1.7 }}>
-              {data.description}
-            </p>
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', fontSize: '13px', color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>
-              <span>👥 Ideal for: {data.idealFor}</span>
-              <span>📅 Install: {data.installTime}</span>
-            </div>
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <a href="/#contact" style={{ background: 'white', color: '#0A1628', fontSize: '15px', fontWeight: 800, padding: '14px 24px', borderRadius: '10px', textDecoration: 'none' }}>
-                Request Free Installation →
-              </a>
-            </div>
-          </div>
-          <div style={{ position: 'relative', height: '400px', borderRadius: '20px 20px 0 0', overflow: 'hidden' }}>
-            <Image
-              src={data.image}
-              alt={data.name}
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
-              priority
-              quality={90}
-            />
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge={`${data.icon} Free for Qualifying NYC Businesses · ${data.idealFor}`}
+        headline={<><span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.35)', textUnderlineOffset: '6px', textDecorationThickness: '3px' }}>{data.name}</span><br />for NYC Businesses</>}
+        sub={`${data.tagline}. ${data.description}`}
+        primaryCta={{ label: 'Request Free Installation →', href: '/#contact' }}
+        secondaryCta={{ label: "See What's Included", href: '#features-section' }}
+        pills={[`✅ Free Installation`, `📅 Installed in ${data.installTime}`, '🔄 Always Restocked', '📝 No Contracts']}
+        image={data.image}
+        overlayColor="rgba(5,15,35,0.68)"
+        minHeight="65vh"
+      />
 
       {/* ── Features ── */}
-      <section style={{ padding: '72px 0', background: '#F8FAFC' }}>
+      <section id="features-section" style={{ padding: '72px 0', background: '#F8FAFC' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span className="section-label">What's Included</span>

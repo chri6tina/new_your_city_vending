@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import PageHero from '../../../components/PageHero'
 import { neighborhoods, getNeighborhood } from '../../../lib/neighborhoods'
 
 export async function generateStaticParams() {
@@ -82,47 +82,16 @@ export default async function NeighborhoodPage({ params }) {
 
   return (
     <main>
-      {/* ── Hero ── */}
-      <section style={{ position: 'relative', minHeight: '65vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <Image
-            src="/new_york_city_hero.jpg"
-            alt={`Vending services in ${data.name}, ${data.borough}`}
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            priority
-            quality={80}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(160deg, ${overlayColor} 0%, ${overlayColor.replace('0.70', '0.55')} 100%)` }} />
-        </div>
-        <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '20px', padding: '120px 0 80px', maxWidth: '660px' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.28)', color: 'rgba(255,255,255,0.92)', fontSize: '13px', fontWeight: 600, padding: '8px 16px', borderRadius: '100px', width: 'fit-content', backdropFilter: 'blur(4px)' }}>
-            📍 {data.borough}, New York City
-          </span>
-          <h1 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 900, color: 'white', lineHeight: 1.07, letterSpacing: '-0.03em' }}>
-            Free Vending & Micro Market<br />
-            <span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.35)', textUnderlineOffset: '6px', textDecorationThickness: '3px' }}>
-              Services in {data.name}
-            </span>
-          </h1>
-          <p style={{ fontSize: 'clamp(15px, 2vw, 18px)', color: 'rgba(255,255,255,0.82)', lineHeight: 1.65, maxWidth: '560px' }}>
-            We provide free vending machines, micro markets, coffee stations, and pantry services to businesses in {data.name} — known for its {data.knownFor}. Zero cost. No contracts. Installed in 5–7 days.
-          </p>
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a href="/#contact" style={{ background: 'white', color: '#0A1628', fontSize: '16px', fontWeight: 800, padding: '15px 28px', borderRadius: '10px', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-              Request a Free Site Visit →
-            </a>
-            <a href="#services-section" style={{ color: 'rgba(255,255,255,0.88)', fontSize: '15px', fontWeight: 600, paddingBottom: '2px', borderBottom: '2px solid rgba(255,255,255,0.35)', textDecoration: 'none' }}>
-              See Our Services
-            </a>
-          </div>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            {['✅ Free Installation', '🔄 Always Restocked', '🔧 Full Maintenance', '📝 No Contracts'].map(t => (
-              <span key={t} style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', color: 'rgba(255,255,255,0.82)', fontSize: '12px', fontWeight: 600, padding: '6px 14px', borderRadius: '100px', backdropFilter: 'blur(4px)' }}>{t}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge={`📍 ${data.borough}, New York City`}
+        headline={<>Free Vending &amp; Micro Market<br /><span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.35)', textUnderlineOffset: '6px', textDecorationThickness: '3px' }}>Services in {data.name}</span></>}
+        sub={`We provide free vending machines, micro markets, coffee stations, and pantry services to businesses in ${data.name} — known for its ${data.knownFor}. Zero cost. No contracts. Installed in 5–7 days.`}
+        primaryCta={{ label: 'Request a Free Site Visit →', href: '/#contact' }}
+        secondaryCta={{ label: 'See Our Services', href: '#services-section' }}
+        pills={['✅ Free Installation', '🔄 Always Restocked', '🔧 Full Maintenance', '📝 No Contracts']}
+        overlayColor={overlayColor}
+        minHeight="65vh"
+      />
 
       {/* ── About the Neighborhood ── */}
       <section style={{ padding: '64px 0', background: 'white', borderBottom: '1px solid #E2E8F0' }}>
