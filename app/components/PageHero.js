@@ -40,9 +40,10 @@ export default function PageHero({
           src={image}
           alt="NYC Vending Services"
           fill
+          sizes="100vw"
           style={{ objectFit: 'cover', objectPosition: 'center top' }}
           priority
-          quality={85}
+          quality={75}
         />
         <div style={{
           position: 'absolute',
