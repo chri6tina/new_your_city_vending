@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <header className={styles.header}>
-      {/* Top bar */}
+      {/* Announcement bar */}
       <div className={styles.topBar}>
         <div className="container">
           <span>🗽 Serving All 5 NYC Boroughs &nbsp;·&nbsp; Free Installation &nbsp;·&nbsp; No Contracts &nbsp;·&nbsp; <a href="#contact" className={styles.topPhone}>Get a Free Quote →</a></span>
@@ -26,10 +26,14 @@ export default function Navbar() {
       {/* Main nav */}
       <nav className={styles.nav} aria-label="Main navigation">
         <div className={`container ${styles.navInner}`}>
+
           {/* Logo */}
           <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
-            <span className={styles.logoMark}>NYC</span>
-            <span className={styles.logoText}>Vending</span>
+            <span className={styles.logoIcon}>🏙️</span>
+            <span className={styles.logoText}>
+              <span className={styles.logoName}>NYC Vending</span>
+              <span className={styles.logoSub}>Local · Family Owned</span>
+            </span>
           </Link>
 
           {/* Desktop links */}
@@ -41,9 +45,9 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Desktop CTA */}
-          <a href="#contact" className={`btn btn-primary ${styles.ctaBtn}`}>
-            Get a Free Quote
+          {/* Desktop CTA — simple outlined */}
+          <a href="#contact" className={styles.ctaBtn}>
+            Request a Visit
           </a>
 
           {/* Hamburger */}
@@ -72,8 +76,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <a href="#contact" className={`btn btn-primary ${styles.drawerCta}`}>
-            Get a Free Quote
+          <a href="#contact" className={styles.drawerCta} onClick={() => setOpen(false)}>
+            Request a Free Site Visit →
           </a>
         </div>
       )}
