@@ -8,9 +8,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://new-your-city-vend
 
 const boroughs = ['manhattan', 'brooklyn', 'queens', 'the-bronx', 'staten-island']
 
-export default function sitemap() {
+export default async function sitemap() {
   const now = new Date()
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
 
   const staticPages = [
     { url: BASE_URL,              lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },

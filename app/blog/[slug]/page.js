@@ -2,13 +2,13 @@ import { notFound } from 'next/navigation'
 import { getAllPosts, getPostBySlug } from '../../../lib/blog'
 
 export async function generateStaticParams() {
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   return posts.map(p => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
   if (!post) return {}
   return {
     title: `${post.title} | NYC Vending Blog`,
@@ -65,7 +65,7 @@ function markdownToHtml(md) {
 
 export default async function BlogPost({ params }) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
   if (!post) notFound()
 
   const html = markdownToHtml(post.content)

@@ -6,8 +6,8 @@ export const metadata = {
   description: 'Expert tips, guides, and insights about vending machines, micro markets, and office refreshment services for New York City businesses.',
 }
 
-export default function BlogIndex() {
-  const posts = getAllPosts()
+export default async function BlogIndex() {
+  const posts = await getAllPosts()
 
   return (
     <main>
